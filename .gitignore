@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# Training artifacts and caches
+artifacts/*
+!artifacts/.gitkeep
+outputs/*
+!outputs/.gitkeep
+.cache/
+wandb/
+runs/
+
+# Downloaded datasets (the tiny demo is intentionally tracked)
+data/raw/*
+!data/raw/.gitkeep
+data/processed/
+
+# Editors / OS
+.DS_Store
+.idea/
+.vscode/

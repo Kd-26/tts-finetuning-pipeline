@@ -1,0 +1,33 @@
+seed: 42
+
+model:
+  checkpoint: microsoft/speecht5_tts
+  vocoder: microsoft/speecht5_hifigan
+  speaker_encoder: speechbrain/spkrec-xvect-voxceleb
+
+data:
+  manifest: data/manifest.csv
+  sampling_rate: 16000
+  min_duration_seconds: 0.5
+  max_duration_seconds: 20.0
+  max_text_tokens: 200
+  # Set to a directory to reuse expensive preprocessing between runs.
+  cache_dir: artifacts/preprocessed
+
+training:
+  output_dir: artifacts/speecht5-checkpoints
+  final_model_dir: artifacts/speecht5-final
+  per_device_train_batch_size: 4
+  per_device_eval_batch_size: 2
+  gradient_accumulation_steps: 8
+  learning_rate: 0.00001
+  warmup_steps: 500
+  max_steps: 4000
+  logging_steps: 25
+  eval_steps: 500
+  save_steps: 500
+  save_total_limit: 3
+  gradient_checkpointing: true
+  fp16: auto
+  num_workers: 2
+  resume_from_checkpoint: null

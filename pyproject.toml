@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tts-finetune-pipeline"
+version = "0.1.0"
+description = "Reproducible SpeechT5 fine-tuning and inference pipeline"
+readme = "README.md"
+requires-python = ">=3.10,<3.13"
+license = {text = "Apache-2.0"}
+authors = [{name = "TTS Fine-tuning Pipeline contributors"}]
+
+[project.scripts]
+tts-validate = "tts_finetune.validate:main"
+tts-train = "tts_finetune.train:main"
+tts-infer = "tts_finetune.infer:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]

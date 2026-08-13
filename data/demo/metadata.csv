@@ -1,0 +1,4 @@
+audio_path,text,speaker_id,split
+wavs/demo_001.wav,This tiny sample checks the training pipeline.,demo_speaker,train
+wavs/demo_002.wav,It is not intended to produce a useful voice.,demo_speaker,train
+wavs/demo_003.wav,Use clean recordings for a real experiment.,demo_speaker,validation

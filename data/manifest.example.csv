@@ -1,0 +1,3 @@
+audio_path,text,speaker_id,split
+wavs/clip_0001.wav,Replace this with an exact transcript.,speaker_a,train
+wavs/clip_0002.wav,Keep some recordings for evaluation.,speaker_a,validation

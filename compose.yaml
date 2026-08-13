@@ -1,0 +1,43 @@
+services:
+  validate:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: tts-finetune:cpu
+    command: ["tts_finetune.validate", "--config", "configs/smoke.yaml"]
+    volumes:
+      - ./data:/workspace/data
+
+  smoke:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: tts-finetune:cpu
+    command: ["tts_finetune.train", "--config", "configs/smoke.yaml"]
+    volumes:
+      - ./artifacts:/workspace/artifacts
+      - ./data:/workspace/data
+      - hf-cache:/workspace/.cache/huggingface
+
+  train-gpu:
+    profiles: ["gpu"]
+    build:
+      context: .
+      dockerfile: Dockerfile.gpu
+    image: tts-finetune:gpu
+    command: ["tts_finetune.train", "--config", "configs/base.yaml"]
+    shm_size: "8gb"
+    volumes:
+      - ./artifacts:/workspace/artifacts
+      - ./data:/workspace/data
+      - hf-cache:/workspace/.cache/huggingface
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+volumes:
+  hf-cache:
